@@ -6,8 +6,8 @@ http://www.videolan.org/developers/x264.html
 command: ./x264-encode.sh <bit-depth> <file_output> <file_input> <tuning>
 ex: ./x264-encode.sh 10bit output.mkv input.mp4 animation
 bit-depth available:
-  - 8bit (for 8-bit depth)
-  - 10bit (for 10-bit depth)
+	- 8bit (for 8-bit depth)
+	- 10bit (for 10-bit depth)
 tuning available:
 	- animation (for animation)
 	- film (for film or movie)

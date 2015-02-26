@@ -24,26 +24,21 @@ H=0
 ERROR=0
 if [ -n "$E"  -a "$E" != "help" ]
 then
-	if [ -n "$FILEOUT" -a -n "$FILEIN" ]
+	if [ -n "$FILEOUT" -a -n "$FILEIN" -a -n "$TUNE" ]
 	then
-		if [ -n "$TUNE" ]
+		if [ "$E" =  "8bit" ]
 		then
-			if [ "$E" =  "8bit" ]
-			then
-				R=1
-				ENC="/usr/local/bin/x264"
-			elif [ "$E" = "10bit" ]
-			then
-				R=1
-				ENC="/usr/bin/x264-10bit"
-			else
-				echo "ERROR!!"
-				echo "bit-depth not supported"
-				echo "or check your VideoLAN x264 installation"
-				echo "Encoding failed!!"
-			fi
+			R=1
+			ENC="/usr/local/bin/x264"
+		elif [ "$E" = "10bit" ]
+		then
+			R=1
+			ENC="/usr/bin/x264-10bit"
 		else
-			ERROR=1
+			echo "ERROR!!"
+			echo "bit-depth not supported"
+			echo "or check your VideoLAN x264 installation"
+			echo "Encoding failed!!"
 		fi
 	else
 		ERROR=1
@@ -56,9 +51,9 @@ else
 fi
 # Script :
 if [ $R -eq 1 ]
-	then
-		$ENC --profile $PROF --level $LVL --preset veryslow --tune $TUNE --crf $CRF --min-keyint 12 --scenecut $SC --bframe $BF --b-adapt 2 --ref 10 --weightp 2 --qpmin 10 --qpmax 51 --qcomp 0.6 --rc-lookahead 40 --direct auto --aq-mode 3 --aq-strength 0.8 --merange 24 --me umh --subme 10 --trellis 2 --psy-rd 0.40:0.60 --output $FILEOUT $FILEIN
-		echo "$FILEIN encoding done!"
+then
+	$ENC --profile $PROF --level $LVL --preset veryslow --tune $TUNE --crf $CRF --min-keyint 12 --scenecut $SC --bframe $BF --b-adapt 2 --ref 10 --weightp 2 --qpmin 10 --qpmax 51 --qcomp 0.6 --rc-lookahead 40 --direct auto --aq-mode 3 --aq-strength 0.8 --merange 24 --me umh --subme 10 --trellis 2 --psy-rd 0.40:0.60 --output $FILEOUT $FILEIN
+	echo "$FILEIN encoding done!"
 fi
 # Help messege
 if [ $H -eq 1 ]
